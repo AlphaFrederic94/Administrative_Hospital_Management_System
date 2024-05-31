@@ -1,25 +1,28 @@
 Administrative Hospital Management System 
-Works more like a sort of Tracking in a Hospital whwere the Super Admin is in charge to Manage everthing we could talk of workflow in this case 
+Works more like a record Tracker in a Hospital where the Super Admin is in charge of Managing everthing "we could talk of workflow in this case" 
 
 # what gets mainly used
-- We will be following an MVC model and a Microservice Archutecture for ours sytem Design
-- Front end Will male use of HTML, CSS Js and or Bootstrap
-- Backend Developeers will bw in charge of ensuring Cohesion and Coupling Between Various Parts of the System
+- We will be following an MVC model and a Microservice Architecture for our sytem Design
+- Front end Will make use of HTML, CSS Js and/or Bootstrap
+- Backend Developers will be in charge of ensuring Cohesion and Coupling Between Various Parts of the System
 - -- There by designing Various Segmets of the application for the microservice architecture to get implemented.
 - We would create an open API (Custom API) for this project using Flask
 
 What is Microservice Architecture?
-Microservice architecture is an architectural style that structures an application as a collection of small, loosely coupled services, 
-each of which implements a specific business functionality. These services can be developed, deployed, and scaled independently.
+Microservice architecture is an architectural style that structures an application as a collection of small, loosely coupled services, each of which implements a specific business functionality. These services can be developed, deployed, and scaled independently.
 
 #Benefits of Using Microservices for a Hospital Management System
 
-Scalability: Each microservice can be scaled independently based on its load. For example, the appointment scheduling service can be scaled up during peak hours without affecting other services.
+Scalability: Each microservice can be scaled independently based on it's load. 
+For example, the appointment scheduling service can be scaled-up during peak hours without affecting other services.
 
 Flexibility in Technology Stack: Different services can use different technologies best suited for their specific requirements. 
 For instance, a service handling real-time patient data can be built with a high-performance, low-latency technology.
+
 Independent Deployment: Services can be updated, deployed, and maintained independently, leading to faster development cycles and reduced downtime.
+
 Resilience and Fault Isolation: If one service fails, it doesn’t necessarily bring down the entire system. This increases the overall reliability and availability of the system.
+
 Ease of Maintenance and Development: Smaller codebases for individual services are easier to manage and understand, making development and maintenance more efficient.
 
 # Example Microservices for a Hospital Management System
