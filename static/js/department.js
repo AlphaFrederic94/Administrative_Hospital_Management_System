@@ -2,12 +2,13 @@ $(document).ready(function () {
 
     var table
 
-    function addUndergoes(data) {
+
+    function adddepartment(data) {
 
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "undergoes",
+            "url": "department",
             "method": "POST",
             "headers": {
                 "content-type": "application/json",
@@ -20,20 +21,45 @@ $(document).ready(function () {
 
         $.ajax(settings).done(function (response) {
             $('.modal.in').modal('hide')
-            $.notify("Undergoes Added Successfully", { "status": "success" });
+            $.notify("Department Added Successfully", { "status": "success" });
             table.destroy();
             $('#datatable4 tbody').empty(); // empty in case the columns change
-            getUndergoes()
+            getdepartment()
         });
 
     }
 
-    function getUndergoes() {
+    function updatedepartment(data, department_id) {
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "department/" + department_id,
+            "method": "PUT",
+            "headers": {
+                "content-type": "application/json",
+                "cache-control": "no-cache"
+            },
+            "processData": false,
+            "data": JSON.stringify(data)
+        }
+
+        $.ajax(settings).done(function (response) {
+            $('.modal.in').modal('hide')
+            $.notify("Department Updated Successfully", { "status": "success" });
+            table.destroy();
+            $('#datatable4 tbody').empty(); // empty in case the columns change
+            getdepartment()
+        });
+
+
+    }
+
+    function getdepartment() {
 
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "undergoes",
+            "url": "department",
             "method": "GET",
             "headers": {
                 "cache-control": "no-cache"
@@ -53,7 +79,13 @@ $(document).ready(function () {
                 "aaSorting": [],
                 aoColumns: [
                     {
-                        mData: 'doc_id'
+                        mData: 'department_id'
+                    },
+                    {
+                        mData: 'name'
+                    },
+                    {
+                        mData: 'head_id'
                     },
                     {
                         mData: 'doc_first_name'
@@ -62,39 +94,11 @@ $(document).ready(function () {
                         mData: 'doc_last_name'
                     },
                     {
-                        mData: 'pat_id'
-                    },
-                    {
-                        mData: 'pat_first_name'
-                    },
-                    {
-                        mData: 'pat_last_name'
-                    },
-                    {
-                        mData: 'proc_code'
-                    },
-                    {
-                        mData: 'u_date'
-                    },
-                    {
-                        mData: 'nur_id'
-                    },
-                    {
-                        mData: 'nur_first_name'
-                    },
-                    {
-                        mData: 'nur_last_name'
-                    },
-                    {
-                        mData: 'room_no'
+                        mRender: function (o) {
+                            return '<button class="btn-xs btn btn-info btn-edit" type="button">Edit</button>';
+                        }
                     }
                 ]
-            });
-            $('#datatable4 tbody').on('click', '.delete-btn', function () {
-                var data = table.row($(this).parents('tr')).data();
-                console.log(data)
-                deleteUndergoes(data.pat_id)
-
             });
             $('.btn-edit').one("click", function (e) {
                 var data = table.row($(this).parents('tr')).data();
@@ -102,13 +106,13 @@ $(document).ready(function () {
                     for (var key in data) {
                         $("[name=" + key + "]").val(data[key])
                     }
-                    $("#savetheundergoes").off("click").on("click", function (e) {
+                    $("#savethedepartment").off("click").on("click", function (e) {
                         var instance = $('#detailform').parsley();
                         instance.validate()
                         console.log(instance.isValid())
                         if (instance.isValid()) {
                             jsondata = $('#detailform').serializeJSON();
-                            updateUndergoes(jsondata, data.pat_id)
+                            updatedepartment(jsondata, data.department_id)
                         }
 
                     })
@@ -123,34 +127,28 @@ $(document).ready(function () {
 
     }
 
-
-
-
-    $("#addUndergoes").click(function () {
+    $("#adddepartment").click(function () {
         $('#detailform input,textarea').val("")
         $('#myModal').modal().one('shown.bs.modal', function (e) {
 
-            $(".form_datetime").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:ss',
-                startDate: new Date(),
-                initialDate: new Date()
-            });
-            console.log("innn")
-            $("#savetheundergoes").off("click").on("click", function (e) {
+            console.log('innn')
+            $("#savethedepartment").off("click").on("click", function (e) {
                 console.log("inn")
                 var instance = $('#detailform').parsley();
                 instance.validate()
                 if (instance.isValid()) {
                     jsondata = $('#detailform').serializeJSON();
-                    addUndergoes(jsondata)
+                    adddepartment(jsondata)
                 }
 
             })
 
         })
 
+
+
     })
 
 
-    getUndergoes()
+    getdepartment()
 })

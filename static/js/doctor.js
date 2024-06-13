@@ -3,12 +3,12 @@ $(document).ready(function () {
     var table
 
 
-    function addPatient(data) {
+    function addDoctor(data) {
 
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "patient",
+            "url": "doctor",
             "method": "POST",
             "headers": {
                 "content-type": "application/json",
@@ -21,19 +21,19 @@ $(document).ready(function () {
 
         $.ajax(settings).done(function (response) {
             $('.modal.in').modal('hide')
-            $.notify("Patient Added Successfully", { "status": "success" });
+            $.notify("Doctor Added Successfully", { "status": "success" });
             table.destroy();
             $('#datatable4 tbody').empty(); // empty in case the columns change
-            getPatient()
+            getDoctor()
         });
 
     }
 
-    function deletePatient(id) {
+    function deleteDoctor(id) {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "patient/" + id,
+            "url": "doctor/" + id,
             "method": "DELETE",
             "headers": {
                 "cache-control": "no-cache",
@@ -51,10 +51,10 @@ $(document).ready(function () {
             closeOnConfirm: false
         }, function () {
             $.ajax(settings).done(function (response) {
-                swal("Deleted!", "Patient has been deleted.", "success");
+                swal("Deleted!", "Doctor has been deleted.", "success");
                 table.destroy();
                 $('#datatable4 tbody').empty(); // empty in case the columns change
-                getPatient()
+                getDoctor()
             });
 
 
@@ -62,11 +62,11 @@ $(document).ready(function () {
 
     }
 
-    function updatePatient(data, id) {
+    function updateDoctor(data, id) {
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "patient/" + id,
+            "url": "doctor/" + id,
             "method": "PUT",
             "headers": {
                 "content-type": "application/json",
@@ -77,22 +77,22 @@ $(document).ready(function () {
         }
 
         $.ajax(settings).done(function (response) {
+            $.notify("Doctor Updated Successfully", { "status": "success" });
             $('.modal.in').modal('hide')
-            $.notify("Patient Updated Successfully", { "status": "success" });
             table.destroy();
             $('#datatable4 tbody').empty(); // empty in case the columns change
-            getPatient()
+            getDoctor()
         });
 
 
     }
 
-    function getPatient() {
+    function getDoctor() {
 
         var settings = {
             "async": true,
             "crossDomain": true,
-            "url": "patient",
+            "url": "doctor",
             "method": "GET",
             "headers": {
                 "cache-control": "no-cache"
@@ -112,22 +112,19 @@ $(document).ready(function () {
                 "aaSorting": [],
                 aoColumns: [
                     {
-                        mData: 'pat_id'
+                        mData: 'doc_id'
                     },
                     {
-                        mData: 'pat_first_name'
+                        mData: 'doc_first_name'
                     },
                     {
-                        mData: 'pat_last_name'
+                        mData: 'doc_last_name'
                     },
                     {
-                        mData: 'pat_insurance_no'
+                        mData: 'doc_address'
                     },
                     {
-                        mData: 'pat_address'
-                    },
-                    {
-                        mData: 'pat_ph_no'
+                        mData: 'doc_ph_no'
                     },
                     {
                         mRender: function (o) {
@@ -144,7 +141,7 @@ $(document).ready(function () {
             $('#datatable4 tbody').on('click', '.delete-btn', function () {
                 var data = table.row($(this).parents('tr')).data();
                 console.log(data)
-                deletePatient(data.pat_id)
+                deleteDoctor(data.doc_id)
 
             });
             $('.btn-edit').one("click", function (e) {
@@ -159,7 +156,7 @@ $(document).ready(function () {
                         console.log(instance.isValid())
                         if (instance.isValid()) {
                             jsondata = $('#detailform').serializeJSON();
-                            updatePatient(jsondata, data.pat_id)
+                            updateDoctor(jsondata, data.doc_id)
                         }
 
                     })
@@ -181,14 +178,14 @@ $(document).ready(function () {
         $('#detailform input,textarea').val("")
         $('#myModal').modal().one('shown.bs.modal', function (e) {
 
-            console.log('innn')
+            console.log("innn")
             $("#savethepatient").off("click").on("click", function (e) {
                 console.log("inn")
                 var instance = $('#detailform').parsley();
                 instance.validate()
                 if (instance.isValid()) {
                     jsondata = $('#detailform').serializeJSON();
-                    addPatient(jsondata)
+                    addDoctor(jsondata)
                 }
 
             })
@@ -200,5 +197,5 @@ $(document).ready(function () {
     })
 
 
-    getPatient()
+    getDoctor()
 })
