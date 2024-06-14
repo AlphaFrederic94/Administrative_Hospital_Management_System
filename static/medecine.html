@@ -138,7 +138,6 @@
             e.preventDefault();
             const medicineName = document.getElementById('medicineName').value;
             const description = document.getElementById('medicineDescription').value;
-
             const table = document.getElementById('medicinesTable').getElementsByTagName('tbody')[0];
             const row = table.insertRow();
             row.insertCell(0).innerText = medicineName;
@@ -148,7 +147,6 @@
         });
     </script>
    
-    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
