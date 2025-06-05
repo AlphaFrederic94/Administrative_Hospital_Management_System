@@ -27,12 +27,27 @@ PulseCare is a comprehensive Hospital Management System designed to streamline h
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### 🐳 Docker Deployment (Recommended)
+
+1. **Clone and run with Docker**:
+   ```bash
+   git clone <repository-url>
+   cd Administrative_Hospital_Management_System
+   docker-compose up -d
+   ```
+
+2. **Access the application**:
+   - Open your browser to `http://localhost:5001`
+   - Use the default login credentials below
+
+### 🔧 Manual Installation
+
+#### Prerequisites
 - Python 3.8+
 - SQLite3
-- Flask and dependencies (see requirements below)
+- Docker (optional, for containerized deployment)
 
-### Installation
+#### Installation Steps
 
 1. **Clone the repository**
    ```bash
@@ -42,7 +57,7 @@ PulseCare is a comprehensive Hospital Management System designed to streamline h
 
 2. **Install dependencies**
    ```bash
-   pip install flask flask-restful werkzeug pyjwt
+   pip install -r requirements.txt
    ```
 
 3. **Initialize the database**
@@ -59,7 +74,7 @@ PulseCare is a comprehensive Hospital Management System designed to streamline h
 
 5. **Access the application**
    - Open your browser to `http://127.0.0.1:5001`
-   - Use the login credentials from the initialization script
+   - Use the default login credentials below
 
 ## 📁 Project Structure
 

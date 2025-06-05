@@ -220,4 +220,14 @@ def patient_lab_results():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,host=config['host'],port=config['port'])
+    import os
+    # Use environment variables for Docker deployment
+    host = os.getenv('FLASK_HOST', config['host'])
+    port = int(os.getenv('FLASK_PORT', config['port']))
+    debug = os.getenv('FLASK_ENV', 'production') != 'production'
+
+    print(f"🏥 Starting PulseCare Hospital Management System...")
+    print(f"🌐 Server: http://{host}:{port}")
+    print(f"🔧 Environment: {'Development' if debug else 'Production'}")
+
+    app.run(host=host, port=port, debug=debug)
